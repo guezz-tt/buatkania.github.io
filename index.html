@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>HBD Sayangku ❤️</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+<style>
+:root{
+  --pink:#ff4d6d;
+  --hot:#ff0a54;
+  --bg:#fff0f3;
+}
+
+/* ================= CURSOR LOVE ================= */
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' fill='red'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>"),auto;
+}
+
+/* ================= BODY ================= */
+body{
+  margin:0;
+  background:linear-gradient(-45deg,#fff0f3,#ffe5ec,#ffd6e0);
+  background-size:400% 400%;
+  animation:bgMove 12s ease infinite;
+  overflow:hidden;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Arial Rounded MT Bold',sans-serif;
+}
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* ================= LOVE TRAIL ================= */
+.love-trail{
+  position:fixed;
+  pointer-events:none;
+  animation:trail 1s forwards;
+  z-index:9999;
+}
+@keyframes trail{
+  to{transform:translateY(-30px) scale(0);opacity:0}
+}
+
+/* ================= HUJAN HATI ================= */
+.particle{
+  position:absolute;
+  top:-20px;
+  font-size:20px;
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg)}
+}
+
+/* ================= WRAPPER ================= */
+.wrapper{
+  width:90%;
+  max-width:380px;
+  position:relative;
+  z-index:10;
+}
+
+/* ================= POPUP ================= */
+.popup{
+  display:none;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);
+  padding:25px;
+  border-radius:40px;
+  text-align:center;
+  border:4px solid white;
+  animation:bounceIn .9s cubic-bezier(.175,.885,.32,1.275),
+            glow 3s ease-in-out infinite;
+}
+.popup.active{display:block}
+
+@keyframes bounceIn{
+  0%{transform:scale(.6) rotate(-5deg);opacity:0}
+  60%{transform:scale(1.05) rotate(2deg);opacity:1}
+  100%{transform:scale(1) rotate(0)}
+}
+@keyframes glow{
+  0%,100%{box-shadow:0 25px 50px rgba(255,77,109,.3)}
+  50%{box-shadow:0 30px 70px rgba(255,77,109,.6)}
+}
+
+/* ================= MEDIA ================= */
+.media-box{
+  width:100%;
+  height:200px;
+  border-radius:25px;
+  overflow:hidden;
+  margin-bottom:15px;
+}
+.media-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  animation:floatImg 5s ease-in-out infinite;
+}
+@keyframes floatImg{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+
+/* ================= BUTTON ================= */
+button{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:25px;
+  background:linear-gradient(45deg,var(--hot),var(--pink));
+  color:white;
+  font-size:1.1rem;
+  font-weight:bold;
+  margin-top:10px;
+  transition:.3s;
+}
+button:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 12px 25px rgba(255,77,109,.5);
+}
+button:active{transform:scale(.95)}
+
+/* ================= LOVE BAR ================= */
+.bar-bg{
+  background:#ffe5ec;
+  height:15px;
+  border-radius:10px;
+  margin:15px 0;
+  overflow:hidden;
+}
+#bar{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,var(--hot),var(--pink));
+  animation:pulseBar 1s infinite;
+}
+@keyframes pulseBar{
+  50%{opacity:.6}
+}
+
+/* ================= CAKE ================= */
+.cake-area{
+  position:relative;
+  height:120px;
+  margin:15px auto;
+  cursor:pointer;
+  animation:cakeFloat 3s ease-in-out infinite;
+}
+@keyframes cakeFloat{
+  50%{transform:translateY(-6px)}
+}
+.cake-base{
+  width:100px;
+  height:60px;
+  background:#f4a261;
+  border-radius:10px;
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+}
+.candle{
+  width:8px;
+  height:30px;
+  background:#e63946;
+  position:absolute;
+  top:30px;
+  left:50%;
+  transform:translateX(-50%);
+}
+.flame{
+  width:15px;
+  height:25px;
+  background:orange;
+  border-radius:50%;
+  position:absolute;
+  top:-20px;
+  left:50%;
+  transform:translateX(-50%);
+  animation:flicker .2s infinite alternate;
+}
+@keyframes flicker{
+  to{transform:translateX(-50%) scale(1.3)}
+}
+
+/* ================= NONO ================= */
+#nono{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  background:white;
+  padding:20px;
+  border-radius:30px;
+  border:5px solid var(--pink);
+  z-index:1000;
+  text-align:center;
+  transition:.4s cubic-bezier(.175,.885,.32,1.275);
+}
+#nono.show{transform:translate(-50%,-50%) scale(1)}
+</style>
+</head>
+
+<body>
+
+<div id="rain"></div>
+
+<div class="wrapper">
+
+<div id="p1" class="popup active">
+  <div class="media-box">
+    <img src="intro.webp" onerror="this.src='https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif'">
+  </div>
+  <h2>Haloo Sayang ✨</h2>
+  <p>Klik tombol di bawah ya ❤️</p>
+  <button onclick="nextPop('p1','p2')">Cek Sekarang!</button>
+</div>
+
+<div id="p2" class="popup">
+  <h2>cium dulu dong </h2>
+  <p>Klik hati sampai penuh</p>
+  <div class="bar-bg"><div id="bar"></div></div>
+  <button onclick="addLove()" style="background:none;font-size:3rem;box-shadow:none;">💖</button>
+</div>
+
+<div id="p3" class="popup">
+  <div class="media-box">
+    <img src="gif/kania.jpeg" onerror="this.src='https://via.placeholder.com/300x200?text=FOTO+PACAR'">
+  </div>
+  <h2>Happy Birthday Kaniaa 🎂</h2>
+  <div class="cake-area" onclick="tiup()">
+    <div class="cake-base"></div>
+    <div class="candle"><div id="api" class="flame"></div></div>
+  </div>
+  <p id="txt">Tiup lilinnya dong!</p>
+  <button onclick="checkLilin()">Lanjut</button>
+</div>
+
+<div id="m1" class="popup">
+  <div class="media-box"><img src="gif/birth.gif"></div>
+  <p>"8 Januari.
+hari ini bukan hari biasa. hari ini hari lahir bidadari yang berhasil bikin dunia aku jadi lebih seru, lebih rame, dan lebih berwarna.
+selamat ulang tahun yang ke 22 ya cintaaa 🎉
+di umur baru ini, semoga semua hal baik makin sering datang ke hidup kamu. semoga senyum kamu gak pernah hilang, tawa kamu makin lepas, dan semua mimpi kamu pelan-pelan nemuin jalannya."</p>
+  <button onclick="nextPop('m1','m2')">Next (1/5)</button>
+</div>
+
+<div id="m2" class="popup">
+  <div class="media-box"><img src="gif/flow.jpg"></div>
+  <p>"di umur 22 ini, kamu bukan cuma bertambah dewasa, tapi juga makin kuat.
+aku tau kamu udah lewatin banyak hal yang bikin capek, yang bikin sedih, tapi semuanya ngebentuk kamu jadi pribadi yang luar biasa.
+
+aku bangga sama kamu.
+cara kamu bertahan, cara kamu jalanin hidup, dan cara kamu jadi diri kamu sendiri itu semua bikin aku makin yakin kalau kamu adalah orang yang tepat buat aku. aku bakal ada disamping kmu nemenin kamu"❤️</p>
+  <button onclick="nextPop('m2','m3')">Next (2/5)</button>
+</div>
+
+<div id="m3" class="popup">
+  <div class="media-box"><img src="gif/kiss.gif"></div>
+  <p>"anjay sekarang aku resmi jadi berondong nih kiw kiw godain aku dong, gimana hadiah dari aku cinta, kmu seneng dapet dua hadiah dari aku 😏,ga usah dibilang lah ya hadiahnya apa aja wkwkw. walaupun kamu 22 dan aku masih 21 (iya, aku berondong kamu wkwk), tapi perasaan aku ke kamu selalu serius.
+makasih udah nerima aku apa adanya, dengan segala kekurangan dan keanehan aku. "</p>
+  <button onclick="nextPop('m3','m4')">Next (3/5)</button>
+</div>
+
+<div id="m4" class="popup">
+  <div class="media-box"><img src="gif/peluk.gif"></div>
+  <p>"Di umur kamu yang ke-22 ini, aku punya satu harapan sederhana:
+semoga kita bisa terus jalan bareng, tumbuh bareng, dan saling jaga satu sama lain.
+
+Semoga tahun ini penuh kebahagiaan, kesehatan, dan hal-hal baik buat kamu.
+Dan semoga aku masih bisa ada di samping kmu nemenin kamu di setiap cerita hidup kamu."</p>
+  <button onclick="nextPop('m4','m5')">Next (4/5)</button>
+</div>
+
+<div id="m5" class="popup">
+  <div class="media-box"><img src="gif/love.gif"></div>
+  <p><b>Selamat ulang tahun cintaku. 🎂❤️
+makasih udah lahir ke dunia, makasih juga udah milih aku.❤️</b></p>
+  <button onclick="location.href='index2.html'">nihh bunganya</button>
+</div>
+
+</div>
+
+<div id="nono">
+  <div class="media-box" style="height:150px;"><img src="gif/no-no-no.gif"></div>
+  <h3>Hey No No </h3>
+  <p>Tiup dulu lilinnya dong cinta</p>
+  <button onclick="nono.classList.remove('show')">Okee</button>
+</div>
+
+<script>
+/* HUJAN */
+setInterval(()=>{
+  const h=document.createElement('div');
+  h.className='particle';
+  h.innerHTML=['❤️','💖','✨','🌸'][Math.random()*4|0];
+  h.style.left=Math.random()*100+'vw';
+  h.style.animationDuration=(Math.random()*3+2)+'s';
+  rain.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+},300);
+
+/* LOVE TRAIL */
+document.addEventListener('mousemove',e=>{
+  const l=document.createElement('div');
+  l.className='love-trail';
+  l.innerHTML='❤️';
+  l.style.left=e.clientX+'px';
+  l.style.top=e.clientY+'px';
+  document.body.appendChild(l);
+  setTimeout(()=>l.remove(),1000);
+});
+
+let progress=0;
+let lilin=false;
+
+function nextPop(a,b){
+  document.getElementById(a).classList.remove('active');
+  document.getElementById(b).classList.add('active');
+}
+
+function addLove(){
+  progress+=20;
+  bar.style.width=progress+'%';
+  confetti({particleCount:60,spread:70});
+  if(progress>=100)setTimeout(()=>nextPop('p2','p3'),500);
+}
+
+function tiup(){
+  lilin=true;
+  api.style.display='none';
+  txt.innerText='Make a wish ✨';
+  confetti({particleCount:200,spread:90});
+}
+
+function checkLilin(){
+  if(!lilin)nono.classList.add('show');
+  else nextPop('p3','m1');
+}
+
+function reset(){
+  progress=0;
+  lilin=false;
+  bar.style.width='0%';
+  api.style.display='block';
+  document.querySelectorAll('.popup').forEach(p=>p.classList.remove('active'));
+  p1.classList.add('active');
+}
+</script>
+
+</body>
+</html>
